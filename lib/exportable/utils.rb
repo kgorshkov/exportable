@@ -12,7 +12,7 @@ module Exportable
         raise ArgumentError, 'Exportable: Expecting Array type for field options'
       end
       fields = options[:only] - options[:except] + options[:methods]
-      { fields: fields, header: options[:header] }
+      { fields: fields, header: options[:header], i18n: options[:i18n] }
     end
   end
 end

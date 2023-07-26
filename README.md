@@ -19,7 +19,7 @@ $ gem install exportable
 ```
 
 ## Usage
-Just add a one liner hook 'exportable' in your model and your model will be provided 
+Just add a one liner hook 'exportable' in your model and your model will be provided
 with class level export methods.
 
 ```ruby
@@ -28,7 +28,7 @@ class Article < ApplicationRecord
 end
 ```
 
-You can then use export methods on the model with supporting formats (:csv, :xls, :xml) and field options. 
+You can then use export methods on the model with supporting formats (:csv, :xls, :xml) and field options.
 
 ```ruby
 Article.export(:csv)
@@ -59,7 +59,7 @@ send_data Article.export(:csv), filename: 'output.csv
 
 Following options are available for hook method and export methods. Please note that options in export methods will always take higher precedence.
 
-###:only
+### :only
 
   By default all the fields in model will be exported. You can controll the fields to export using 'only' option.
 
@@ -67,7 +67,7 @@ Following options are available for hook method and export methods. Please note 
 Article.export_csv only: [:title, :published_on, :status]
 ```
 
-###:except
+### :except
 
 Omit exportable fields with 'except' option
 
@@ -75,11 +75,11 @@ Omit exportable fields with 'except' option
 Article.export_xml except: [:status]
 ```
 
-###:header
+### :header
 
 By default exporting adds header row. Omit header by option 'header: false'
 
-###:methods
+### :methods
 
  Exporting not only limited to model attributes. You can also add custom model methods to exportable fields.
 ```ruby
@@ -89,16 +89,21 @@ Note: *If your model method contains query to association please be carefull to 
 ```ruby
 Article.includes(:user).export methods: [:user_name]   
 ```
+
+### :i18n
+
+By default header names are printed for the header row.  To use i18n translation dictionary files, use the option 'i18n: ' with an unnamed string interpolation format.  For example: For example, 'i18n: "%s"' would look for a dictionary file entry format of "[field]:".  'i18n: "col_%s"' would look for a dictionary file entry format of "col_[field]:".
+
 ## Testing
  This plugin uses Rspec for testing. Go to gem folder and run:
- 
+
  ```bash
  $ rspec
  ```
- 
+
 
 ## Contributing
-More output formats are always welcome. 
+More output formats are always welcome.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

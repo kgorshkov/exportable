@@ -21,7 +21,7 @@ module Exportable
 
         def export(options)
           CSV.generate do |csv|
-            csv << options[:fields].map(&:to_s) if options[:header]
+            csv << options[:fields].map{ |col| options[:i18n]? I18n.t(options[:i18n] % col) : col } if options[:header]
             @model.where(nil).find_each do |record|
               csv << options[:fields].map { |attr| record.send(attr).to_s }
             end
